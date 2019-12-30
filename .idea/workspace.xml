@@ -1,9 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e0d78946-8371-4db7-b8c0-7a6ab75c9201" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Vha6ekbKQs085DspAhwoYqSepm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0d78946-8371-4db7-b8c0-7a6ab75c9201" name="Default Changelist" comment="" />
+      <created>1577707607219</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577707607219</updated>
+      <workItem from="1577707610584" duration="6952000" />
+      <workItem from="1577729031131" duration="384000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1232" y="249" key="#npm_start" timestamp="1577728863624">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state x="-1232" y="249" key="#npm_start/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728863624" />
+    <state width="1875" height="451" key="GridCell.Tab.0.bottom" timestamp="1577731121186">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1875" height="451" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577731121186" />
+    <state width="1379" height="215" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1577709740533" />
+    <state width="1875" height="451" key="GridCell.Tab.0.center" timestamp="1577731121185">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1875" height="451" key="GridCell.Tab.0.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577731121185" />
+    <state width="1379" height="215" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1577709740532" />
+    <state width="1875" height="451" key="GridCell.Tab.0.left" timestamp="1577731121184">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1875" height="451" key="GridCell.Tab.0.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577731121184" />
+    <state width="1379" height="215" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1577709740531" />
+    <state width="1875" height="451" key="GridCell.Tab.0.right" timestamp="1577731121186">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1875" height="451" key="GridCell.Tab.0.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577731121186" />
+    <state width="1379" height="215" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1577709740532" />
+    <state width="1899" height="357" key="GridCell.Tab.1.bottom" timestamp="1577728959544">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959544" />
+    <state width="1899" height="357" key="GridCell.Tab.1.center" timestamp="1577728959544">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.1.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959544" />
+    <state width="1899" height="357" key="GridCell.Tab.1.left" timestamp="1577728959544">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.1.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959544" />
+    <state width="1899" height="357" key="GridCell.Tab.1.right" timestamp="1577728959544">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.1.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959544" />
+    <state width="1899" height="357" key="GridCell.Tab.2.bottom" timestamp="1577728959545">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.2.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959545" />
+    <state width="1899" height="357" key="GridCell.Tab.2.center" timestamp="1577728959545">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.2.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959545" />
+    <state width="1899" height="357" key="GridCell.Tab.2.left" timestamp="1577728959545">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.2.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959545" />
+    <state width="1899" height="357" key="GridCell.Tab.2.right" timestamp="1577728959545">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.2.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959545" />
+    <state width="1899" height="357" key="GridCell.Tab.3.bottom" timestamp="1577728959546">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.3.bottom/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959546" />
+    <state width="1899" height="357" key="GridCell.Tab.3.center" timestamp="1577728959546">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.3.center/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959546" />
+    <state width="1899" height="357" key="GridCell.Tab.3.left" timestamp="1577728959546">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.3.left/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959546" />
+    <state width="1899" height="357" key="GridCell.Tab.3.right" timestamp="1577728959546">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1899" height="357" key="GridCell.Tab.3.right/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728959546" />
+    <state x="-1625" y="116" key="SettingsEditor" timestamp="1577728853113">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state x="-1625" y="116" key="SettingsEditor/0.23.1440.877/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1577728853113" />
+    <state x="221" y="100" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1577707719400" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/App.js</url>
+          <line>14</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/App.js</url>
+          <line>7</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
