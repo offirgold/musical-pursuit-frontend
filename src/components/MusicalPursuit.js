@@ -13,6 +13,8 @@ class MusicalPursuit extends React.Component {
             disabled: true,
             isEnd: false,
             isLoaded: false,
+            correctness: 0,
+            bodekMode: false,
         };
     }
 
@@ -56,15 +58,13 @@ class MusicalPursuit extends React.Component {
         const {myAnswer, answer, score} = this.state;
 
         if (myAnswer === answer) {
-            window.alert("Nice! The answer was correct");
             this.setState({
-                score: score + 10
+                score: score + 10, correctness: 1,
             });
         } else {
-            window.alert("The answer was wrong");
             if (this.state.score >= 5) {
                 this.setState({
-                    score: score - 5
+                    score: score - 5, correctness: 2,
                 });
             }
         }
@@ -107,6 +107,12 @@ class MusicalPursuit extends React.Component {
         window.location.reload();
     }
 
+    bodekMode = (boolean) => {
+        if (this.state.bodekMode !== boolean) {
+            this.setState({bodekMode: boolean});
+        }
+    }
+
     renderFinishPage = () => {
         return (
             <div className="result">
@@ -116,9 +122,15 @@ class MusicalPursuit extends React.Component {
                     The correct answers for the questions were:
                     <ul>
                         {this.state.data.map((item, index) => (
-                            <li className="ui floating message options" key={index}>
-                                {item.answer}
-                            </li>
+                            <table className="ui striped table">
+                                <tbody>
+                                <tr className="center aligned" key={index}>
+                                    <td>{item.question}</td>
+                                    <td>{item.answer}</td>
+                                    <td className="right aligned"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         ))}
                     </ul>
                 </p>
@@ -138,21 +150,13 @@ class MusicalPursuit extends React.Component {
             return this.renderFinishPage();
         } else {
             return (
-                <div className="App">
+                <div className="result">
+                    <button className="ui left attached button" onClick={() => this.bodekMode(false)}>Player mode</button>
+                    <button className="right attached ui button"onClick={() => this.bodekMode(true)}>Bodek mode</button>
                     <h1>{this.state.question} </h1>
                     <h3>Score: {this.state.score} points </h3>
                     <span>{`Questions ${currentQuestion + 1}  out of ${this.state.data.length} remaining `}</span>
-                    {options.map(option => (
-                        <p
-                            key={option.id}
-                            className={`ui floating message options
-         ${myAnswer === option ? "selected" : null}
-         `}
-                            onClick={() => this.checkAnswer(option)}
-                        >
-                            {option}
-                        </p>
-                    ))}
+                    {options.map(this.bodekChecker)}
                     {currentQuestion < this.state.data.length - 1 && (
                         <button
                             className="ui inverted button"
@@ -172,12 +176,31 @@ class MusicalPursuit extends React.Component {
         }
     }
 
+    bodekChecker = option =>{
+        if (this.state.bodekMode === true){
+            return (<p
+                    key={option.id}
+                    className={this.state.data[this.state.currentQuestion].answer === option ? "ui floating message selected_right": "ui floating message"}
+                    onClick={() => this.checkAnswer(option)}>
+                    {option}
+                </p>)
+        } else {
+            return (<p
+                    key={option.id}
+                    className={`ui floating message options ${this.state.myAnswer === option ? "selected" : null}`}
+                    onClick={() => this.checkAnswer(option)}>
+                    {option}
+                </p>
+            )
+        }
+    }
+
+
         render()
         {
             const {options, myAnswer, currentQuestion, isEnd} = this.state;
             return (
                 <div>
-                    <h1>{'Loading...'}</h1>
                     {this.state && this.state.data &&
                     <div>{this.renderLevels(options, myAnswer, currentQuestion, isEnd)}</div>
                     }

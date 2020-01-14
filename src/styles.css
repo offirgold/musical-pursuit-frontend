@@ -26,6 +26,10 @@ body {
   background: linear-gradient(to right, #74ebd5, #acb6e5) !important;
 }
 
+.selected_right {
+  background: linear-gradient(to right, #90ee90, #32cd32) !important;
+}
+
 ul {
   list-style-type: none;
 }
