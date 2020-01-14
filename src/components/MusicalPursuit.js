@@ -1,49 +1,67 @@
 import React from "react";
 
 class MusicalPursuit extends React.Component {
-    state = {
-        data: null,
-        currentQuestion: 0,
-        myAnswer: null,
-        options: [],
-        score: 0,
-        disabled: true,
-        isEnd: false
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: null,
+            currentQuestion: 0,
+            myAnswer: null,
+            options: [],
+            score: 0,
+            disabled: true,
+            isEnd: false,
+            isLoaded: false,
+        };
+    }
+
+    componentDidMount() {
+        const self = this;
+        this.fetchData(self);
+    }
+
+    fetchData = (self) => {
+        fetch("http://localhost:8080/musical_pursuit_backend/rest/pursuit/Play")
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        window.alert('Looks like there was a problem. Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then(function (data) {
+                        self.setState({data: data});
+                    });
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
     };
 
     loadData = () => {
-
-        this.setState(() => {
-            return {
-                questions: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].question,
-                answer: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].answer,
-                options: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].options
-            };
-        });
-    };
-
-    loadFromBackendandStoreInSession = () => {
-        if (window.sessionStorage.getItem('Data') == null) {
-            console.log("FETCHING FROM BACKEND...");
-            this.getDataFromBackend();
+        if (this.state.isLoaded === false) {
+            this.setState(() => {
+                return {
+                    question: this.state.data[this.state.currentQuestion].question,
+                    answer: this.state.data[this.state.currentQuestion].answer,
+                    options: this.state.data[this.state.currentQuestion].options,
+                    isLoaded: true,
+                };
+            });
         }
-        console.log("LOADING FROM SESSION STORAGE...")
-        const data = JSON.parse(window.sessionStorage.getItem('Data'));
-        return data;
-
-    }
-    componentDidMount() {
-        this.loadData();
-    }
+    };
 
     handleScore = () => {
         const {myAnswer, answer, score} = this.state;
 
         if (myAnswer === answer) {
+            window.alert("Nice! The answer was correct");
             this.setState({
                 score: score + 10
             });
         } else {
+            window.alert("The answer was wrong");
             if (this.state.score >= 5) {
                 this.setState({
                     score: score - 5
@@ -59,26 +77,25 @@ class MusicalPursuit extends React.Component {
         console.log(this.state.currentQuestion);
     };
 
-
     componentDidUpdate(prevProps, prevState) {
         if (this.state.currentQuestion !== prevState.currentQuestion) {
             this.setState(() => {
                 return {
                     disabled: true,
-                    questions: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].question,
-                    options: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].options,
-                    answer: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].answer
+                    question: this.state.data[this.state.currentQuestion].question,
+                    options: this.state.data[this.state.currentQuestion].options,
+                    answer: this.state.data[this.state.currentQuestion].answer
                 };
             });
         }
     }
 
-    //check answer
     checkAnswer = answer => {
         this.setState({myAnswer: answer, disabled: false});
     };
+
     finishHandler = () => {
-        if (this.state.currentQuestion === this.loadFromBackendandStoreInSession().length - 1) {
+        if (this.state.currentQuestion === this.state.data.length - 1) {
             this.setState({
                 isEnd: true
             });
@@ -90,38 +107,41 @@ class MusicalPursuit extends React.Component {
         window.location.reload();
     }
 
-    render() {
-        const {options, myAnswer, currentQuestion, isEnd} = this.state;
+    renderFinishPage = () => {
+        return (
+            <div className="result">
+                <h1> GAME OVER</h1>
+                <h3>Your FINAL SCORE is {this.state.score} points </h3>
+                <p>
+                    The correct answers for the questions were:
+                    <ul>
+                        {this.state.data.map((item, index) => (
+                            <li className="ui floating message options" key={index}>
+                                {item.answer}
+                            </li>
+                        ))}
+                    </ul>
+                </p>
+                <button
+                    className="ui inverted button"
+                    onClick={this.startOver}
+                >
+                    Start Over
+                </button>
+            </div>
+        );
+    }
 
+    renderLevels = (options, myAnswer, currentQuestion, isEnd) => {
+        this.loadData();
         if (isEnd) {
-            return (
-                <div className="result">
-                    <h1> GAME OVER</h1>
-                    <h3>Your FINAL SCORE is {this.state.score} points </h3>
-                    <p>
-                        The correct answers for the questions were:
-                        <ul>
-                            {this.loadFromBackendandStoreInSession().map((item, index) => (
-                                <li className="ui floating message options" key={index}>
-                                    {item.answer}
-                                </li>
-                            ))}
-                        </ul>
-                    </p>
-                        <button
-                            className="ui inverted button"
-                            onClick={this.startOver}
-                        >
-                            Start Over
-                        </button>
-                </div>
-            );
+            return this.renderFinishPage();
         } else {
             return (
                 <div className="App">
-                    <h1>{this.state.questions} </h1>
+                    <h1>{this.state.question} </h1>
                     <h3>Score: {this.state.score} points </h3>
-                    <span>{`Questions ${currentQuestion+1}  out of ${this.loadFromBackendandStoreInSession().length} remaining `}</span>
+                    <span>{`Questions ${currentQuestion + 1}  out of ${this.state.data.length} remaining `}</span>
                     {options.map(option => (
                         <p
                             key={option.id}
@@ -133,7 +153,7 @@ class MusicalPursuit extends React.Component {
                             {option}
                         </p>
                     ))}
-                    {currentQuestion < this.loadFromBackendandStoreInSession().length - 1 && (
+                    {currentQuestion < this.state.data.length - 1 && (
                         <button
                             className="ui inverted button"
                             disabled={this.state.disabled}
@@ -142,7 +162,7 @@ class MusicalPursuit extends React.Component {
                             Next
                         </button>
                     )}
-                    {currentQuestion === this.loadFromBackendandStoreInSession().length - 1 && (
+                    {currentQuestion === this.state.data.length - 1 && (
                         <button className="ui inverted button" onClick={this.finishHandler}>
                             Finish
                         </button>
@@ -152,29 +172,18 @@ class MusicalPursuit extends React.Component {
         }
     }
 
-    getDataFromBackend = () => {
-        // fetch("http://localhost:8080/musical_pursuit_backend/rest/pursuit/Play")
-        //     .then(
-        //         function(response) {
-        //             if (response.status !== 200) {
-        //                 window.alert('Looks like there was a problem. Status Code: ' + response.status);
-        //                 return;
-        //             }
-        //             response.json().then(function(data) {
-        //                 window.sessionStorage.setItem("Data", JSON.stringify(response.data));
-        //                 console.log("PRINnsdjknfsjdkfnjskd")
-        //             });
-        //         }
-        //     )
-        //     .catch(function(err) {
-        //         console.log('Fetch Error :-S', err);
-        //     });
-
-        window.sessionStorage.setItem("Data", JSON.stringify([{"id":0,"question":"In 000000, Billy Talent release the song __.","answer":"Red Flag","options":["Alive & Amplified","Permanent","Dance Dance","Red Flag"]},{"id":1,"question":"In 111111, Foster the People release the song __.","answer":"Houdini","options":["Sick Boy","Radioactive","Young Blood","Houdini"]}]))
-        const data = window.sessionStorage.getItem("Data")
-        if (data == null){
-            window.alert("Failed fetching the data");
+        render()
+        {
+            const {options, myAnswer, currentQuestion, isEnd} = this.state;
+            return (
+                <div>
+                    <h1>{'Loading...'}</h1>
+                    {this.state && this.state.data &&
+                    <div>{this.renderLevels(options, myAnswer, currentQuestion, isEnd)}</div>
+                    }
+                </div>
+            )
         }
     }
-}
+
     export default MusicalPursuit;
