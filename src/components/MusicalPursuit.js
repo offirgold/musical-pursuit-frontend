@@ -1,5 +1,4 @@
 import React from "react";
-// import axios from "axios";
 
 class MusicalPursuit extends React.Component {
     state = {
@@ -16,20 +15,24 @@ class MusicalPursuit extends React.Component {
 
         this.setState(() => {
             return {
-                questions: this.getDataFromLocalStorage()[this.state.currentQuestion].question,
-                answer: this.getDataFromLocalStorage()[this.state.currentQuestion].answer,
-                options: this.getDataFromLocalStorage()[this.state.currentQuestion].options
+                questions: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].question,
+                answer: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].answer,
+                options: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].options
             };
         });
     };
 
-    getDataFromLocalStorage = () => {
-        const data = JSON.parse(localStorage.getItem('Data'));
+    loadFromBackendandStoreInSession = () => {
+        if (window.sessionStorage.getItem('Data') == null) {
+            console.log("FETCHING FROM BACKEND...");
+            this.getDataFromBackend();
+        }
+        console.log("LOADING FROM SESSION STORAGE...")
+        const data = JSON.parse(window.sessionStorage.getItem('Data'));
         return data;
 
     }
     componentDidMount() {
-        this.getDataFromBackend()
         this.loadData();
     }
 
@@ -62,9 +65,9 @@ class MusicalPursuit extends React.Component {
             this.setState(() => {
                 return {
                     disabled: true,
-                    questions: this.getDataFromLocalStorage()[this.state.currentQuestion].question,
-                    options: this.getDataFromLocalStorage()[this.state.currentQuestion].options,
-                    answer: this.getDataFromLocalStorage()[this.state.currentQuestion].answer
+                    questions: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].question,
+                    options: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].options,
+                    answer: this.loadFromBackendandStoreInSession()[this.state.currentQuestion].answer
                 };
             });
         }
@@ -75,7 +78,7 @@ class MusicalPursuit extends React.Component {
         this.setState({myAnswer: answer, disabled: false});
     };
     finishHandler = () => {
-        if (this.state.currentQuestion === this.getDataFromLocalStorage().length - 1) {
+        if (this.state.currentQuestion === this.loadFromBackendandStoreInSession().length - 1) {
             this.setState({
                 isEnd: true
             });
@@ -98,7 +101,7 @@ class MusicalPursuit extends React.Component {
                     <p>
                         The correct answers for the questions were:
                         <ul>
-                            {this.getDataFromLocalStorage().map((item, index) => (
+                            {this.loadFromBackendandStoreInSession().map((item, index) => (
                                 <li className="ui floating message options" key={index}>
                                     {item.answer}
                                 </li>
@@ -118,7 +121,7 @@ class MusicalPursuit extends React.Component {
                 <div className="App">
                     <h1>{this.state.questions} </h1>
                     <h3>Score: {this.state.score} points </h3>
-                    <span>{`Questions ${currentQuestion+1}  out of ${this.getDataFromLocalStorage().length} remaining `}</span>
+                    <span>{`Questions ${currentQuestion+1}  out of ${this.loadFromBackendandStoreInSession().length} remaining `}</span>
                     {options.map(option => (
                         <p
                             key={option.id}
@@ -130,7 +133,7 @@ class MusicalPursuit extends React.Component {
                             {option}
                         </p>
                     ))}
-                    {currentQuestion < this.getDataFromLocalStorage().length - 1 && (
+                    {currentQuestion < this.loadFromBackendandStoreInSession().length - 1 && (
                         <button
                             className="ui inverted button"
                             disabled={this.state.disabled}
@@ -139,7 +142,7 @@ class MusicalPursuit extends React.Component {
                             Next
                         </button>
                     )}
-                    {currentQuestion === this.getDataFromLocalStorage().length - 1 && (
+                    {currentQuestion === this.loadFromBackendandStoreInSession().length - 1 && (
                         <button className="ui inverted button" onClick={this.finishHandler}>
                             Finish
                         </button>
@@ -150,12 +153,28 @@ class MusicalPursuit extends React.Component {
     }
 
     getDataFromBackend = () => {
-        // axios.get("http://localhost:8080/musical_pursuit_backend/rest/pursuit/test")
-        //     .then(response => {
-        //         console.log(response.data);
-        //         return response.data
+        // fetch("http://localhost:8080/musical_pursuit_backend/rest/pursuit/Play")
+        //     .then(
+        //         function(response) {
+        //             if (response.status !== 200) {
+        //                 window.alert('Looks like there was a problem. Status Code: ' + response.status);
+        //                 return;
+        //             }
+        //             response.json().then(function(data) {
+        //                 window.sessionStorage.setItem("Data", JSON.stringify(response.data));
+        //                 console.log("PRINnsdjknfsjdkfnjskd")
+        //             });
+        //         }
+        //     )
+        //     .catch(function(err) {
+        //         console.log('Fetch Error :-S', err);
         //     });
-        localStorage.setItem("Data", JSON.stringify([{"id":0,"question":"In 000000, Billy Talent release the song __.","answer":"Red Flag","options":["Alive & Amplified","Permanent","Dance Dance","Red Flag"]},{"id":1,"question":"In 111111, Foster the People release the song __.","answer":"Houdini","options":["Sick Boy","Radioactive","Young Blood","Houdini"]}]))
+
+        window.sessionStorage.setItem("Data", JSON.stringify([{"id":0,"question":"In 000000, Billy Talent release the song __.","answer":"Red Flag","options":["Alive & Amplified","Permanent","Dance Dance","Red Flag"]},{"id":1,"question":"In 111111, Foster the People release the song __.","answer":"Houdini","options":["Sick Boy","Radioactive","Young Blood","Houdini"]}]))
+        const data = window.sessionStorage.getItem("Data")
+        if (data == null){
+            window.alert("Failed fetching the data");
+        }
     }
 }
     export default MusicalPursuit;
